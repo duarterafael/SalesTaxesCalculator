@@ -22,6 +22,7 @@ import com.br.liferay.sales.taxes.calculator.model.ProductType;
 import com.br.liferay.sales.taxes.calculator.service.IProductTypeService;
 
 import io.swagger.annotations.ApiOperation;
+import lombok.val;
 
 @RestController()
 @RequestMapping("/api/v1/product/types")
@@ -51,9 +52,9 @@ public class ProductTypeController {
 	
 	@PostMapping
 	@ApiOperation(value= "Save a new product type", notes = "Save a new product type", response = ProductType.class, responseContainer = "Object")
-	public ProductType create(@RequestBody ProductTypeDTO productTypeDTO) {
+	public ResponseEntity<ProductType> create(@RequestBody @Valid ProductTypeDTO productTypeDTO) {
 		ProductType newProductType = this.modelMapper.map(productTypeDTO, ProductType.class);
-		return productTypeService.insert(newProductType);
+		return new ResponseEntity<>(productTypeService.insert(newProductType), HttpStatus.CREATED);
 	}
 	
 	@DeleteMapping(path ={"/{id}"})
@@ -64,7 +65,7 @@ public class ProductTypeController {
 	
 	@PutMapping(path ={"/{id}"})
 	@ApiOperation(value= "Update a product type", notes = "Update a product type", response = ProductType.class, responseContainer = "Object")
-	public ProductType update(@PathVariable long id, @RequestBody UpdateProductTypeDTO updateProductTypeDTO) {
+	public ProductType update(@PathVariable long id, @RequestBody @Valid UpdateProductTypeDTO updateProductTypeDTO) {
 		ProductType productType = this.modelMapper.map(updateProductTypeDTO, ProductType.class);
 		productType.setId(id);
 		return productTypeService.update(productType);
