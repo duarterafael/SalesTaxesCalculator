@@ -2,6 +2,9 @@ package com.br.liferay.sales.taxes.calculator.controller;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import java.util.Random;
+
+import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
@@ -15,6 +18,8 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import com.br.liferay.sales.taxes.calculator.model.ProductType;
 import com.br.liferay.sales.taxes.calculator.service.IProductTypeService;
+import com.br.liferay.sales.taxes.calculator.utils.Constants;
+import com.br.liferay.sales.taxes.calculator.utils.UnitTestUtils;
 
 @RunWith(SpringRunner.class)
 @WebMvcTest(value = ProductTypeController.class)
@@ -29,7 +34,7 @@ public class ProductTypeControllerTest extends AbstractControllerTest {
 	private ProductType createProductType() {
 		ProductType productTypeMock = new ProductType();
         productTypeMock.setName("Book");
-        productTypeMock.setTax(20.99);
+        productTypeMock.setTax(UnitTestUtils.randomDouble(0, 100, 2));
         return productTypeMock;
 	}
 	
@@ -54,6 +59,87 @@ public class ProductTypeControllerTest extends AbstractControllerTest {
     public void insertNameIsNull() throws Exception{
         ProductType productTypeMock = createProductType();
         productTypeMock.setName(null);
+        
+        Mockito.when(iProductTypeService.insert(Mockito
+                .any(ProductType.class)))
+                .thenReturn(productTypeMock);
+
+        mockMvc.perform(MockMvcRequestBuilders
+                .post(super.BASE_URL+"product/types")
+                .content(super.asJsonString(productTypeMock))
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isBadRequest());
+    }
+	
+	@Test
+    public void insertNameLessThanMinimumValue() throws Exception{
+        ProductType productTypeMock = createProductType();
+        productTypeMock.setName(RandomStringUtils.randomAlphanumeric(Constants.PRODUCT_TYPE_NAME_MIN_LENGTH-1));
+        Mockito.when(iProductTypeService.insert(Mockito
+                .any(ProductType.class)))
+                .thenReturn(productTypeMock);
+
+        mockMvc.perform(MockMvcRequestBuilders
+                .post(super.BASE_URL+"product/types")
+                .content(super.asJsonString(productTypeMock))
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isBadRequest());
+    }
+	
+	@Test
+    public void insertNameLessThanMaximumValue() throws Exception{
+        ProductType productTypeMock = createProductType();
+        productTypeMock.setName(RandomStringUtils.randomAlphanumeric(Constants.PRODUCT_TYPE_NAME_MAX_LENGTH+1));
+        Mockito.when(iProductTypeService.insert(Mockito
+                .any(ProductType.class)))
+                .thenReturn(productTypeMock);
+
+        mockMvc.perform(MockMvcRequestBuilders
+                .post(super.BASE_URL+"product/types")
+                .content(super.asJsonString(productTypeMock))
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isBadRequest());
+    }
+	
+	@Test
+    public void insertTaxLessThanMinimumValue() throws Exception{
+        ProductType productTypeMock = createProductType();
+        productTypeMock.setTax(-0.01);
+        Mockito.when(iProductTypeService.insert(Mockito
+                .any(ProductType.class)))
+                .thenReturn(productTypeMock);
+
+        mockMvc.perform(MockMvcRequestBuilders
+                .post(super.BASE_URL+"product/types")
+                .content(super.asJsonString(productTypeMock))
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isBadRequest());
+    }
+	
+	@Test
+    public void insertTaxLessThanMaximumValue() throws Exception{
+        ProductType productTypeMock = createProductType();
+        productTypeMock.setTax(100.01);
+        Mockito.when(iProductTypeService.insert(Mockito
+                .any(ProductType.class)))
+                .thenReturn(productTypeMock);
+
+        mockMvc.perform(MockMvcRequestBuilders
+                .post(super.BASE_URL+"product/types")
+                .content(super.asJsonString(productTypeMock))
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isBadRequest());
+    }
+	
+	@Test
+    public void insertTaxIsNull() throws Exception{
+        ProductType productTypeMock = createProductType();
+        productTypeMock.setTax(null);
         
         Mockito.when(iProductTypeService.insert(Mockito
                 .any(ProductType.class)))

@@ -1,5 +1,7 @@
 package com.br.liferay.sales.taxes.calculator.dto;
 
+import javax.validation.constraints.DecimalMax;
+import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Length;
@@ -25,8 +27,9 @@ public class ProductTypeDTO{
 	@ApiModelProperty(value = "Product name")
 	private String name;
 
+	@DecimalMin(value=Constants.PRODUCT_TYPE_TAX_MIN_LENGTH, inclusive=true, message= "{validation.product.type.tax.length}")
+	@DecimalMax(value=Constants.PRODUCT_TYPE_TAX_MAX_LENGTH, inclusive=true, message= "{validation.product.type.tax.length}")
 	@NotNull(message = "{validation.product.type.tax.notnull}")
-	//@Size(min = Constants.PRODUCT_TYPE_TAX_MAX_LENGTH,  max = Constants.PRODUCT_TYPE_TAX_MIN_LENGTH, message="{validation.product.type.tax.length}")
 	@ApiModelProperty(value = "Tax percentage")
 	private Double tax;
 
