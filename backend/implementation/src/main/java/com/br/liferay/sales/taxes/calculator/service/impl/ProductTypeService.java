@@ -8,11 +8,10 @@ import org.springframework.stereotype.Service;
 import com.br.liferay.sales.taxes.calculator.exception.CustomException;
 import com.br.liferay.sales.taxes.calculator.model.ProductType;
 import com.br.liferay.sales.taxes.calculator.repository.IProductTypeRepository;
-import com.br.liferay.sales.taxes.calculator.service.IProductTypeService;
-import com.br.liferay.sales.taxes.calculator.utils.ErrorMsgProperties;
+import com.br.liferay.sales.taxes.calculator.service.ICRUDService;
 
 @Service
-public class ProductTypeService implements IProductTypeService{
+public class ProductTypeService implements ICRUDService<ProductType, ProductType>{
 	
 	private IProductTypeRepository iProductTypeRepository;
 	
@@ -53,5 +52,7 @@ public class ProductTypeService implements IProductTypeService{
 	public void deleteById(long id) {
 		iProductTypeRepository.deleteById(id);
 	}
+
+	
 
 }
