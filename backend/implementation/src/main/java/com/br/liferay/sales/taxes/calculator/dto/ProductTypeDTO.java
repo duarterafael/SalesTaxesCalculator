@@ -23,7 +23,7 @@ import lombok.Setter;
 public class ProductTypeDTO{
 
 	@NotNull(message = "{validation.product.type.name.notnull}")
-    @Length(min = Constants.PRODUCT_TYPE_NAME_MIN_LENGTH, max = Constants.PRODUCT_TYPE_NAME_MAX_LENGTH, message = "{validation.model.length}")
+    @Length(min = Constants.PRODUCT_TYPE_NAME_MIN_LENGTH, max = Constants.PRODUCT_TYPE_NAME_MAX_LENGTH, message = "{validation.product.type.name.length}")
 	@ApiModelProperty(value = "Product name")
 	private String name;
 

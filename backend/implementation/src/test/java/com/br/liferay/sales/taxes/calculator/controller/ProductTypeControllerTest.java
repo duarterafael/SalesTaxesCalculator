@@ -2,8 +2,6 @@ package com.br.liferay.sales.taxes.calculator.controller;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import java.util.Random;
-
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -16,20 +14,21 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
+import com.br.liferay.sales.taxes.calculator.controller.impl.ProductTypeCRUDControllerImpl;
 import com.br.liferay.sales.taxes.calculator.model.ProductType;
-import com.br.liferay.sales.taxes.calculator.service.IProductTypeService;
+import com.br.liferay.sales.taxes.calculator.service.ICRUDService;
 import com.br.liferay.sales.taxes.calculator.utils.Constants;
 import com.br.liferay.sales.taxes.calculator.utils.UnitTestUtils;
 
 @RunWith(SpringRunner.class)
-@WebMvcTest(value = ProductTypeController.class)
+@WebMvcTest(value = ProductTypeCRUDControllerImpl.class)
 public class ProductTypeControllerTest extends AbstractControllerTest {
 
 	@Autowired
 	private MockMvc mockMvc;
 
 	@MockBean
-	private IProductTypeService iProductTypeService;
+	private ICRUDService<ProductType, ProductType> iProductTypeService;
 	
 	private ProductType createProductType() {
 		ProductType productTypeMock = new ProductType();
@@ -48,7 +47,7 @@ public class ProductTypeControllerTest extends AbstractControllerTest {
                 .thenReturn(productTypeMock);
 
         mockMvc.perform(MockMvcRequestBuilders
-                .post(super.BASE_URL+"product/types")
+                .post(Constants.PRODUCT_TYPE_URL)
                 .content(super.asJsonString(productTypeMock))
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON))
@@ -65,7 +64,7 @@ public class ProductTypeControllerTest extends AbstractControllerTest {
                 .thenReturn(productTypeMock);
 
         mockMvc.perform(MockMvcRequestBuilders
-                .post(super.BASE_URL+"product/types")
+                .post(Constants.PRODUCT_TYPE_URL)
                 .content(super.asJsonString(productTypeMock))
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON))
@@ -81,7 +80,7 @@ public class ProductTypeControllerTest extends AbstractControllerTest {
                 .thenReturn(productTypeMock);
 
         mockMvc.perform(MockMvcRequestBuilders
-                .post(super.BASE_URL+"product/types")
+                .post(Constants.PRODUCT_TYPE_URL)
                 .content(super.asJsonString(productTypeMock))
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON))
@@ -97,7 +96,7 @@ public class ProductTypeControllerTest extends AbstractControllerTest {
                 .thenReturn(productTypeMock);
 
         mockMvc.perform(MockMvcRequestBuilders
-                .post(super.BASE_URL+"product/types")
+                .post(Constants.PRODUCT_TYPE_URL)
                 .content(super.asJsonString(productTypeMock))
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON))
@@ -113,7 +112,7 @@ public class ProductTypeControllerTest extends AbstractControllerTest {
                 .thenReturn(productTypeMock);
 
         mockMvc.perform(MockMvcRequestBuilders
-                .post(super.BASE_URL+"product/types")
+                .post(Constants.PRODUCT_TYPE_URL)
                 .content(super.asJsonString(productTypeMock))
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON))
@@ -129,7 +128,7 @@ public class ProductTypeControllerTest extends AbstractControllerTest {
                 .thenReturn(productTypeMock);
 
         mockMvc.perform(MockMvcRequestBuilders
-                .post(super.BASE_URL+"product/types")
+                .post(Constants.PRODUCT_TYPE_URL)
                 .content(super.asJsonString(productTypeMock))
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON))
@@ -146,7 +145,7 @@ public class ProductTypeControllerTest extends AbstractControllerTest {
                 .thenReturn(productTypeMock);
 
         mockMvc.perform(MockMvcRequestBuilders
-                .post(super.BASE_URL+"product/types")
+                .post(Constants.PRODUCT_TYPE_URL)
                 .content(super.asJsonString(productTypeMock))
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON))

@@ -12,15 +12,15 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@ApiModel(value = "UpdateProductTypeDTO")
+@ApiModel(value = "UpdateProductDTO")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
-public class UpdateProductTypeDTO{
+public class UpdateProductDTO{
 
-	@NotNull(message = "{validation.product.type.id.notnull}")
+	@NotNull(message = "{validation.product.id.notnull}")
     @Min(value = Constants.ID_MIN_VALUE, message = "{validation.product.type.id.min.value}")
-	@ApiModelProperty(value = "Product type id")
+	@ApiModelProperty(value = "Product id")
 	private Long id;
 }
