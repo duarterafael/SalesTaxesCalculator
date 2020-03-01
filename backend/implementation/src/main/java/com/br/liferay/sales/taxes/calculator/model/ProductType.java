@@ -2,8 +2,10 @@ package com.br.liferay.sales.taxes.calculator.model;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -40,8 +42,9 @@ public class ProductType {
 	@ApiModelProperty(value = "Tax percentage")
 	private Double tax;
 	
-	@JsonIgnore
-    @OneToMany(mappedBy = "productType")
-    private List<Product> rentals;
+	 @OneToMany(cascade = CascadeType.ALL,
+	            fetch = FetchType.EAGER,
+	            mappedBy = "productType")
+    private List<Product> products;
     
 }
