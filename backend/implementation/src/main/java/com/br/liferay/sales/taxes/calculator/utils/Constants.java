@@ -20,4 +20,8 @@ public final class Constants {
 	public static final String BASE_URL = "/api/v1";
 	public static final String PRODUCT_URL = BASE_URL+"/products";
 	public static final String PRODUCT_TYPE_URL = PRODUCT_URL+"/types";
+	
+	public static final String BLANCK_SPACE = " ";
+	public static final String IMPORTED_PRODUCT_DESCRIPTION = "imported";
+	
 }
