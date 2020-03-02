@@ -1,6 +1,10 @@
 package com.br.liferay.sales.taxes.calculator.utils;
 
 public final class Constants {
+	
+	//TODO: Put this in a properties file
+	public static final double IMPORTED_PRODUCT_TAX = 5; 
+	
 	//Generic field sizes
 	public static final int ID_MIN_VALUE = 0;
 	
