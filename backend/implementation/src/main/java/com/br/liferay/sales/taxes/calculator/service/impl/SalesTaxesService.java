@@ -1,35 +1,56 @@
 package com.br.liferay.sales.taxes.calculator.service.impl;
 
+import java.util.Optional;
+
 import org.springframework.stereotype.Service;
 
-import com.br.liferay.sales.taxes.calculator.dto.SalesTaxesDTO;
+import com.br.liferay.sales.taxes.calculator.model.Product;
 import com.br.liferay.sales.taxes.calculator.model.ProductsDescriptions;
 import com.br.liferay.sales.taxes.calculator.model.SalesTaxesProductDefinition;
+import com.br.liferay.sales.taxes.calculator.model.SalesTaxesProductsDefinition;
 import com.br.liferay.sales.taxes.calculator.repository.IProductRepository;
 import com.br.liferay.sales.taxes.calculator.repository.IProductTypeRepository;
 import com.br.liferay.sales.taxes.calculator.utils.Constants;
+import com.br.liferay.sales.taxes.calculator.utils.Utils;
 
 @Service
 public class SalesTaxesService{
 	
 	private IProductRepository iProductRepository;
-	private IProductTypeRepository iProductTypeRepository;
 	
-	public SalesTaxesService (IProductRepository iProductRepository, IProductTypeRepository iProductTypeRepository) {
+	public SalesTaxesService (IProductRepository iProductRepository) {
 		this.iProductRepository = iProductRepository;
-		this.iProductTypeRepository = iProductTypeRepository;
 	}
 
-	public SalesTaxesDTO calculateSalesTaxes(ProductsDescriptions productsDescriptions)
+	public SalesTaxesProductsDefinition calculateSalesTaxes(ProductsDescriptions productsDescriptions)
 	{
+		SalesTaxesProductsDefinition salesTaxesProductsDefinition = new SalesTaxesProductsDefinition();
 		for (String productDescription : productsDescriptions.getProductsDescriptions()) {
-			SalesTaxesProductDefinition a = productDescriptionParser(productDescription);
-			
+			SalesTaxesProductDefinition salesTaxesProductDefinition = productDescriptionParser(productDescription);
+			calculateSalesTaxes(salesTaxesProductDefinition);
+			salesTaxesProductsDefinition.getSalesTaxesProductsDefinition().add(salesTaxesProductDefinition);
 		}
-		return null;
+		return salesTaxesProductsDefinition;
 	}
 	
-	
+	private void calculateSalesTaxes(SalesTaxesProductDefinition salesTaxesProductDefinition) {
+		Optional<Product> product = iProductRepository.findByNameIgnoreCase(salesTaxesProductDefinition.getProductName());
+		if(!product.isPresent())
+		{
+			//TODO: throw a custom exception
+		}else
+		{
+			if(salesTaxesProductDefinition.isImported())
+			{
+				salesTaxesProductDefinition.setPriceWithTax(salesTaxesProductDefinition.getPriceWithTax() + (salesTaxesProductDefinition.getPrice()*(Constants.IMPORTED_PRODUCT_TAX/100))); 
+			}
+			
+			salesTaxesProductDefinition.setPriceWithTax(salesTaxesProductDefinition.getPriceWithTax() + (salesTaxesProductDefinition.getPrice()*(product.get().getProductType().getTax()/100))); 
+		}
+		
+		salesTaxesProductDefinition.setPriceWithTax(Utils.ceil(salesTaxesProductDefinition.getPriceWithTax()));
+	}
+ 	
 	private SalesTaxesProductDefinition productDescriptionParser(String productDescription)
 	{
 		SalesTaxesProductDefinition salesTaxesProductDefinition = new SalesTaxesProductDefinition();
@@ -40,7 +61,7 @@ public class SalesTaxesService{
 			int productQty = Integer.valueOf(productQtyStr);
 			salesTaxesProductDefinition.setQty(productQty);
 		}catch (NumberFormatException e) {
-			// TODO: handle exception
+			throw new IllegalArgumentException();
 		}
 		
 		boolean isImported = productDescription.contains(Constants.IMPORTED_PRODUCT_DESCRIPTION);
@@ -63,12 +84,12 @@ public class SalesTaxesService{
 			String productPriceStr = productDescription.substring(productDescription.lastIndexOf(Constants.BLANCK_SPACE)+1);
 			double productPrice = Double.valueOf(productPriceStr);
 			salesTaxesProductDefinition.setPrice(productPrice);
+			salesTaxesProductDefinition.setPriceWithTax(productPrice);
 		}catch (NumberFormatException e) {
-			// TODO: handle exception
+			throw new IllegalArgumentException();
 		}
 		
 		return salesTaxesProductDefinition;
-		
 	}
 	
 	

@@ -17,7 +17,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class ProductsDescriptionDTO {
-	@NotNull(message = "{validation.product.name.notnull}")
+	@NotNull(message = "{validation.product.description.notnull}")
 	@ApiModelProperty(value = "Products Descriptions")
 	private List<String> productsDescriptions;
 }
