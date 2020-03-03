@@ -1,15 +1,14 @@
 package com.br.liferay.sales.taxes.calculator.service.impl;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
 import com.br.liferay.sales.taxes.calculator.model.Product;
-import com.br.liferay.sales.taxes.calculator.model.ProductsDescriptions;
 import com.br.liferay.sales.taxes.calculator.model.SalesTaxesProductDefinition;
 import com.br.liferay.sales.taxes.calculator.model.SalesTaxesProductsDefinition;
 import com.br.liferay.sales.taxes.calculator.repository.IProductRepository;
-import com.br.liferay.sales.taxes.calculator.repository.IProductTypeRepository;
 import com.br.liferay.sales.taxes.calculator.utils.Constants;
 import com.br.liferay.sales.taxes.calculator.utils.Utils;
 
@@ -22,10 +21,10 @@ public class SalesTaxesService{
 		this.iProductRepository = iProductRepository;
 	}
 
-	public SalesTaxesProductsDefinition calculateSalesTaxes(ProductsDescriptions productsDescriptions)
+	public SalesTaxesProductsDefinition calculateSalesTaxes(List<String> productsDescriptions)
 	{
 		SalesTaxesProductsDefinition salesTaxesProductsDefinition = new SalesTaxesProductsDefinition();
-		for (String productDescription : productsDescriptions.getProductsDescriptions()) {
+		for (String productDescription : productsDescriptions) {
 			SalesTaxesProductDefinition salesTaxesProductDefinition = productDescriptionParser(productDescription);
 			calculateSalesTaxes(salesTaxesProductDefinition);
 			salesTaxesProductsDefinition.getSalesTaxesProductsDefinition().add(salesTaxesProductDefinition);

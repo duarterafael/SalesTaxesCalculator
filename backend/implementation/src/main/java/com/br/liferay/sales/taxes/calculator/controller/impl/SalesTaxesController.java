@@ -1,5 +1,7 @@
 package com.br.liferay.sales.taxes.calculator.controller.impl;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.modelmapper.ModelMapper;
@@ -10,8 +12,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.br.liferay.sales.taxes.calculator.dto.ProductsDescriptionDTO;
-import com.br.liferay.sales.taxes.calculator.model.ProductsDescriptions;
 import com.br.liferay.sales.taxes.calculator.service.impl.SalesTaxesService;
 import com.br.liferay.sales.taxes.calculator.utils.Constants;
 
@@ -28,8 +28,7 @@ public class SalesTaxesController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<String> CalculateSalesTaxes(@RequestBody @Valid ProductsDescriptionDTO productsDescriptionDTO){
-		ProductsDescriptions productsDescriptions = this.modelMapper.map(productsDescriptionDTO, ProductsDescriptions.class);	
+	public ResponseEntity<String> CalculateSalesTaxes(@RequestBody @Valid List<String> productsDescriptions){
 		return new ResponseEntity<>(salesTaxesService.calculateSalesTaxes(productsDescriptions).toString(), HttpStatus.OK);
 	}
 }
