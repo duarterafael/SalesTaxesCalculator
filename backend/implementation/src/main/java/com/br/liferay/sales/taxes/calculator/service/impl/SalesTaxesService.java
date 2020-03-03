@@ -65,6 +65,10 @@ public class SalesTaxesService {
 		try {
 			productQtyStr = productDescription.substring(0, firstBlanckSpace);
 			int productQty = Integer.valueOf(productQtyStr);
+			if(productQty <= 0)
+			{
+				throw new CustomException("Product quantity '"+productQty+"' most to be a positive integer number");
+			}
 			salesTaxesProductDefinition.setQty(productQty);
 		} catch (NumberFormatException e) {
 			// TODO: Change this to a error msg propertie
@@ -91,6 +95,10 @@ public class SalesTaxesService {
 			productPriceStr = productDescription
 					.substring(productDescription.lastIndexOf(Constants.BLANCK_SPACE) + 1);
 			double productPrice = Double.valueOf(productPriceStr);
+			if(productPrice <= 0)
+			{
+				throw new CustomException("Product price '"+productPrice+"' most to be a positive floating point number");
+			}
 			salesTaxesProductDefinition.setPrice(productPrice);
 		} catch (NumberFormatException e) {
 			// TODO: Change this to a error msg propertie
