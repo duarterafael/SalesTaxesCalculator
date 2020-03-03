@@ -22,11 +22,6 @@ services:
     depends_on: 
       - mysql
     environment:
-      ACESS_KEY_AWS: AKIAWCYPQKQO4KX7ZPNT
-      SECRET_KEY_AWS: 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
-      BUCKET_AWS: project-amazon-s3
-      EMAIL_USER: springtesteemail@gmail.com
-      EMAIL_PASSWORD: augusto1993 
       API_DATASOURCE_URL: jdbc:mysql://mysql:3307/api?createDatabaseIfNotExist=true&serverTimezone=UTC
       API_DATASOURCE_USER: root
       API_DATASOURCE_PASSWORD: root
