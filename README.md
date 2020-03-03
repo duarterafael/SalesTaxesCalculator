@@ -43,9 +43,9 @@ Finally, data modeling follows a structure from 1 to N. Where the product_type t
 * Based on this assumption, the application was developed in a RESTFul architecture with CRUD for the product and product type entities. In this way it is possible to dynamically change (without having to restart the application) creating new products, changing the tax of an existing product or even removing a product or product type.
 * In this way the application becomes extensible for the registration of these entities, but it is also extensible at the code level for new entities. For this purpose, just implement the interfaces ICRUDController (for controller layer) and ICRUDService (for business layer). When implementing this interface, the programmer will have to implement the crud methods following the unique signature following the defined architectural standardization.
 * The application has the class 'DataLoader' that makes the initial population of the database with the challenge data. If you wanted to insert new user data the APIs:
-Access the product endpoint: http://localhost:8080/api/v1/products
-Access the product type endpoint: http://localhost:8080/api/v1/products/types
-for more information on the APIs access the swagger here: http://localhost:8080/swagger-ui.html#/
+* Access the product endpoint: http://localhost:8080/api/v1/products
+* Access the product type endpoint: http://localhost:8080/api/v1/products/types
+* for more information on the APIs access the swagger here: http://localhost:8080/swagger-ui.html#/
 * Acess the sales taxes calculator endpoint: http://localhost:8080/api/v1/sales/taxes
 
 
