@@ -1,11 +1,6 @@
 # Saler Taxes Calculator:
 A project to calculate a products sales taxes.
 
-### RESTful API details:
-```
-http://localhost:8080/swagger-ui.html#/
-```
-
 #### Project description:  
 * Project created with Spring Boot and Java 8
 * Mysql and Spring Data JPA databases
@@ -34,6 +29,11 @@ mvn spring-boot:run
 * Access the product endpoint: http://localhost:8080/api/v1/products
 * Access the product type endpoint: http://localhost:8080/api/v1/products/types
 * Acess the sales taxes calculator endpoint: http://localhost:8080/api/v1/sales/taxes
+```
+
+### RESTful API details:
+```
+http://localhost:8080/swagger-ui.html#/
 ```
 
 ### TIPS
