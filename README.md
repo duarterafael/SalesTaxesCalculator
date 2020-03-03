@@ -43,7 +43,7 @@ https://stackoverflow.com/questions/45461777/lombok-problems-with-eclipse-oxygen
 * If the unit tests not working, please see the solutions here: 
 https://stackoverflow.com/questions/46717693/eclipse-no-tests-found-using-junit-5-caused-by-noclassdeffounderror-for-launcher
 
-* You can call API using postman collection. Available in: SalesTaxesCalculator/backend/documentation/postman
+* You can call API using postman collection. Available here: https://github.com/duarterafael/SalesTaxesCalculator/tree/master/backend/documentation/postman
 
 * You can see the ER here: https://github.com/duarterafael/SalesTaxesCalculator/blob/master/backend/documentation/ER/ER.png
 
