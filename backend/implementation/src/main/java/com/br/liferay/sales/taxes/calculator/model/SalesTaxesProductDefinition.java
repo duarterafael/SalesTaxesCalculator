@@ -22,7 +22,10 @@ public class SalesTaxesProductDefinition {
 	
 	@Override
 	public String toString() {
-		return qty+Constants.BLANCK_SPACE+productName+Constants.COLON+Constants.BLANCK_SPACE+BigDecimal.valueOf(priceWithTax).setScale(2);
+		return qty+Constants.BLANCK_SPACE+
+				(isImported?Constants.IMPORTED_PRODUCT_DESCRIPTION+Constants.BLANCK_SPACE:"")+
+				productName+Constants.COLON+Constants.BLANCK_SPACE+
+				BigDecimal.valueOf(qty*priceWithTax).setScale(2);
 	}
 	
 }
