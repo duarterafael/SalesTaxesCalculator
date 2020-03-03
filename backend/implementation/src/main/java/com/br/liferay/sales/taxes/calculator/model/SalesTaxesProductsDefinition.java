@@ -29,7 +29,7 @@ public class SalesTaxesProductsDefinition {
 		for (SalesTaxesProductDefinition salesTaxesProductDefinition : salesTaxesProductsDefinition) {
 			str.append(salesTaxesProductDefinition.toString());
 			str.append(Constants.NEW_LINE);
-			salesTaxes += salesTaxesProductDefinition.getPriceWithTax() - salesTaxesProductDefinition.getPrice();
+			salesTaxes += salesTaxesProductDefinition.getQty()*(salesTaxesProductDefinition.getPriceWithTax() - salesTaxesProductDefinition.getPrice());
 			total += salesTaxesProductDefinition.getQty()*salesTaxesProductDefinition.getPriceWithTax();
 		}
 		str.append(Constants.SALES_TAXES_LABEL);
