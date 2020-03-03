@@ -11,13 +11,6 @@ A project to calculate a products sales taxes.
 Right click on the > 'SalesTaxesCalculatorApplication.java' class > Run as > Java application
 ```
 
-### How to run the application (Docker)
-```
-git clone https://github.com/duarterafael/SalesTaxesCalculator.git
-cd SalesTaxesCalculator/
-docker-compose up -d
-```
-
 ### How to run the application (Maven)
 ```
 Make sure you have Maven installed and added to your operating system's PATH, as well as Git and Java 8.
