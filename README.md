@@ -23,7 +23,7 @@ docker-compose up -d
 Make sure you have Maven installed and added to your operating system's PATH, as well as Git and Java 8.
 
 git clone https://github.com/duarterafael/SalesTaxesCalculator.git
-cd SalesTaxesCalculator/ && cd api
+cd SalesTaxesCalculator/ && cd backend/implementation
 mvn spring-boot:run
 ```
 
