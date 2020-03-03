@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.validation.Valid;
 
-import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,10 +19,8 @@ import com.br.liferay.sales.taxes.calculator.utils.Constants;
 public class SalesTaxesController {
 	
 	private SalesTaxesService salesTaxesService;
-	private ModelMapper modelMapper;
 	
 	SalesTaxesController(SalesTaxesService salesTaxesService) {
-		this.modelMapper = new ModelMapper();
 		this.salesTaxesService = salesTaxesService;
 	}
 	

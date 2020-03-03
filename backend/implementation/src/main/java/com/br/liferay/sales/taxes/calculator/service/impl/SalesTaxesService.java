@@ -39,15 +39,16 @@ public class SalesTaxesService{
 			//TODO: throw a custom exception
 		}else
 		{
+			double tax = salesTaxesProductDefinition.getPrice()*(product.get().getProductType().getTax()/100);
+			
 			if(salesTaxesProductDefinition.isImported())
 			{
-				salesTaxesProductDefinition.setPriceWithTax(salesTaxesProductDefinition.getPriceWithTax() + (salesTaxesProductDefinition.getPrice()*(Constants.IMPORTED_PRODUCT_TAX/100))); 
+				tax += salesTaxesProductDefinition.getPrice()*(Constants.IMPORTED_PRODUCT_TAX/100);
 			}
 			
-			salesTaxesProductDefinition.setPriceWithTax(salesTaxesProductDefinition.getPriceWithTax() + (salesTaxesProductDefinition.getPrice()*(product.get().getProductType().getTax()/100))); 
+			tax = Utils.ceil(tax);
+			salesTaxesProductDefinition.setPriceWithTax(Utils.round(salesTaxesProductDefinition.getPrice()+tax));
 		}
-		
-		salesTaxesProductDefinition.setPriceWithTax(Utils.ceil(salesTaxesProductDefinition.getPriceWithTax()));
 	}
  	
 	private SalesTaxesProductDefinition productDescriptionParser(String productDescription)
@@ -83,7 +84,6 @@ public class SalesTaxesService{
 			String productPriceStr = productDescription.substring(productDescription.lastIndexOf(Constants.BLANCK_SPACE)+1);
 			double productPrice = Double.valueOf(productPriceStr);
 			salesTaxesProductDefinition.setPrice(productPrice);
-			salesTaxesProductDefinition.setPriceWithTax(productPrice);
 		}catch (NumberFormatException e) {
 			throw new IllegalArgumentException();
 		}

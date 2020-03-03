@@ -24,8 +24,9 @@ public final class Constants {
 	
 	public static final String BLANCK_SPACE = " ";
 	public static final String IMPORTED_PRODUCT_DESCRIPTION = "imported";
-	public static final String COLONS = ":";
+	public static final String COLON = ":";
 	public static final String SALES_TAXES_LABEL = "Sales Taxes: ";
 	public static final String TOTAL_LABEL = "Total: ";
+	public static final String NEW_LINE = "\n";
 	
 }

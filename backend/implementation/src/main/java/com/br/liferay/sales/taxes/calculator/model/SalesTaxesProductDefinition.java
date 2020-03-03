@@ -1,5 +1,7 @@
 package com.br.liferay.sales.taxes.calculator.model;
 
+import java.math.BigDecimal;
+
 import com.br.liferay.sales.taxes.calculator.utils.Constants;
 
 import lombok.AllArgsConstructor;
@@ -20,7 +22,7 @@ public class SalesTaxesProductDefinition {
 	
 	@Override
 	public String toString() {
-		return qty+Constants.BLANCK_SPACE+productName+Constants.COLONS+Constants.BLANCK_SPACE+priceWithTax;
+		return qty+Constants.BLANCK_SPACE+productName+Constants.COLON+Constants.BLANCK_SPACE+BigDecimal.valueOf(priceWithTax).setScale(2);
 	}
 	
 }

@@ -1,5 +1,6 @@
 package com.br.liferay.sales.taxes.calculator.model;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,15 +28,15 @@ public class SalesTaxesProductsDefinition {
 		double total = 0;
 		for (SalesTaxesProductDefinition salesTaxesProductDefinition : salesTaxesProductsDefinition) {
 			str.append(salesTaxesProductDefinition.toString());
-			str.append(System.getProperty("line.separator"));
+			str.append(Constants.NEW_LINE);
 			salesTaxes += salesTaxesProductDefinition.getPriceWithTax() - salesTaxesProductDefinition.getPrice();
 			total += salesTaxesProductDefinition.getQty()*salesTaxesProductDefinition.getPriceWithTax();
 		}
 		str.append(Constants.SALES_TAXES_LABEL);
-		str.append(Utils.round(salesTaxes));
-		str.append(System.getProperty("line.separator"));
+		str.append(BigDecimal.valueOf(Utils.round(salesTaxes)).setScale(2));
+		str.append(Constants.NEW_LINE);
 		str.append(Constants.TOTAL_LABEL);
-		str.append(Utils.round(total));
+		str.append(BigDecimal.valueOf(Utils.round(total)).setScale(2));
 		
 		return str.toString();
 	}
