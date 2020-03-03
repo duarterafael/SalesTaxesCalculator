@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.br.liferay.sales.taxes.calculator.dto.ProductsDescriptionDTO;
-import com.br.liferay.sales.taxes.calculator.dto.SalesTaxesDTO;
 import com.br.liferay.sales.taxes.calculator.model.ProductsDescriptions;
 import com.br.liferay.sales.taxes.calculator.service.impl.SalesTaxesService;
 import com.br.liferay.sales.taxes.calculator.utils.Constants;
