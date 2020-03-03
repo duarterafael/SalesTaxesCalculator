@@ -1,0 +1,50 @@
+version: '3'
+
+services:
+  car-frontend-client:
+    image: augustols/car-frontend
+    container_name: car-frontend-client
+    ports:
+      - "4200:4200"
+    depends_on: 
+      - api-app-backend
+    networks: 
+      - samsung
+  api-app-backend:
+    # image: augustols/api-app
+    build:
+      context: ./
+      dockerfile: backend/implementation/Dockerfile
+    container_name: api-app-backend
+    ports:
+      - "8080:8080"
+    restart: always  
+    depends_on: 
+      - mysql
+    environment:
+      ACESS_KEY_AWS: AKIAWCYPQKQO4KX7ZPNT
+      SECRET_KEY_AWS: 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
+      BUCKET_AWS: project-amazon-s3
+      EMAIL_USER: springtesteemail@gmail.com
+      EMAIL_PASSWORD: augusto1993 
+      API_DATASOURCE_URL: jdbc:mysql://mysql:3307/api?createDatabaseIfNotExist=true&serverTimezone=UTC
+      API_DATASOURCE_USER: root
+      API_DATASOURCE_PASSWORD: root
+    networks: 
+      - samsung
+  mysql:
+    container_name: mysql
+    image: mysql/mysql-server:5.7
+    environment:
+      MYSQL_DATABASE: api
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_ROOT_HOST: '%'
+    ports:
+      - "3307:3306"
+    networks:
+      - samsung
+    restart: always 
+
+networks:
+  samsung:  
+    driver: bridge
